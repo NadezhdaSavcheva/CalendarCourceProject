@@ -1359,71 +1359,70 @@ void addDurationToEvents(string eventName, string startDate, string endDate)
     {
         while (getline(eventsByDaysFile, wholeLine, '\n'))
         {
-            if (durationOfEvent > 1)
+            if (wholeLine.substr(0, eventName.size()) == eventName && durationOfEvent > 1)
             {
-                if (wholeLine.substr(0, eventName.size()) == eventName)
+                int eventDaysCount = 1;
+
+                while (!(startDay == endDay + 1 && startMonth == endMonth && startYear == endYear))
                 {
-                    int eventDaysCount = 1;
-
-                    while (!(startDay == endDay + 1 && startMonth == endMonth && startYear == endYear))
+                    if (startDay == lastDayOfTheMonth + 1)
                     {
-                        if (startDay == lastDayOfTheMonth + 1)
+                        if (startMonth == 12)
                         {
-                            if (startMonth == 12)
-                            {
-                                startDay = 1;
-                                startMonth++;
-                                startYear++;
-                            }
-                            else
-                            {
-                                startDay = 1;
-                                startMonth++;
-                            }
-                        }
-
-                        if (startDay < 10 && startMonth < 10)
-                        {
-                            secTempFile << eventName << " (Day " << eventDaysCount << "/" << durationOfEvent << ")"
-                                << "-0" << startDay << "/0" << startMonth << "/" << startYear << endl;
-                            secTempFile.flush();
-                            startDay++;
-                            eventDaysCount++;
-                            continue;
-                        }
-                        else if (startDay < 10 && startMonth >= 10)
-                        {
-                            secTempFile << eventName << " (Day " << eventDaysCount << "/" << durationOfEvent << ")"
-                                << "-0" << startDay << "/" << startMonth << "/" << startYear << endl;
-                            secTempFile.flush();
-                            startDay++;
-                            eventDaysCount++;
-                            continue;
-                        }
-                        else if (startDay >= 10 && startMonth < 10)
-                        {
-                            secTempFile << eventName << " (Day " << eventDaysCount << "/" << durationOfEvent << ")"
-                                << "-" << startDay << "/0" << startMonth << "/" << startYear << endl;
-                            secTempFile.flush();
-                            startDay++;
-                            eventDaysCount++;
-                            continue;
+                            startDay = 1;
+                            startMonth++;
+                            startYear++;
                         }
                         else
                         {
-                            secTempFile << eventName << " (Day " << eventDaysCount << "/" << durationOfEvent << ")"
-                                << "-" << startDay << "/" << startMonth << "/" << startYear << endl;
-                            secTempFile.flush();
-                            startDay++;
-                            eventDaysCount++;
-                            continue;
+                            startDay = 1;
+                            startMonth++;
                         }
+                    }
+
+                    if (startDay < 10 && startMonth < 10)
+                    {
+                        secTempFile << eventName << " (Day " << eventDaysCount << "/" << durationOfEvent << ")"
+                            << "-0" << startDay << "/0" << startMonth << "/" << startYear << endl;
+                        secTempFile.flush();
+                        startDay++;
+                        eventDaysCount++;
+                        continue;
+                    }
+                    else if (startDay < 10 && startMonth >= 10)
+                    {
+                        secTempFile << eventName << " (Day " << eventDaysCount << "/" << durationOfEvent << ")"
+                            << "-0" << startDay << "/" << startMonth << "/" << startYear << endl;
+                        secTempFile.flush();
+                        startDay++;
+                        eventDaysCount++;
+                        continue;
+                    }
+                    else if (startDay >= 10 && startMonth < 10)
+                    {
+                        secTempFile << eventName << " (Day " << eventDaysCount << "/" << durationOfEvent << ")"
+                            << "-" << startDay << "/0" << startMonth << "/" << startYear << endl;
+                        secTempFile.flush();
+                        startDay++;
+                        eventDaysCount++;
+                        continue;
+                    }
+                    else
+                    {
+                        secTempFile << eventName << " (Day " << eventDaysCount << "/" << durationOfEvent << ")"
+                            << "-" << startDay << "/" << startMonth << "/" << startYear << endl;
+                        secTempFile.flush();
+                        startDay++;
+                        eventDaysCount++;
+                        continue;
                     }
                 }
             }
-
-            secTempFile << wholeLine << endl;
-            secTempFile.flush();
+            else
+            {
+                secTempFile << wholeLine << endl;
+                secTempFile.flush();
+            }
         }
     }
 
