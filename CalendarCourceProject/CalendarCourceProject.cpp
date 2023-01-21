@@ -30,14 +30,33 @@ void removeEvent();
 void removeEventFromEventsByDaysFile(string);
 void setFirstWeekDay();
 
+/// <summary>
+/// Constant value for max valid year.
+/// </summary>
 const int MAX_VALID_YEAR = 2099;
+
+/// <summary>
+/// Constant value for min valid year.
+/// </summary>
 const int MIN_VALID_YEAR = 1901;
 
+/// <summary>
+/// Function to check if a year is leap.
+/// </summary>
+/// <param name="year"></param>
+/// <returns>true, if it is leap</returns>
 bool isLeap(int year)
 {
     return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
 }
 
+/// <summary>
+/// Function to check for the validity of entered date.
+/// </summary>
+/// <param name="day"></param>
+/// <param name="month"></param>
+/// <param name="year"></param>
+/// <returns>true, if it is valid</returns>
 bool dateValidation(int day, int month, int year)
 {
     if (year > MAX_VALID_YEAR || year < MIN_VALID_YEAR)
@@ -78,6 +97,11 @@ bool dateValidation(int day, int month, int year)
     return true;
 }
 
+/// <summary>
+/// Function to check for the validity of entered month.
+/// </summary>
+/// <param name="month"></param>
+/// <returns>true, if it is valid</returns>
 bool monthValidation(int month)
 {
     if (month < 1 || month > 12)
@@ -90,6 +114,11 @@ bool monthValidation(int month)
     return true;
 }
 
+/// <summary>
+/// Function to check for the validity of entered year.
+/// </summary>
+/// <param name="year"></param>
+/// <returns>true, if it is valid</returns>
 bool yearValidation(int year)
 {
     if (year > MAX_VALID_YEAR || year < MIN_VALID_YEAR)
@@ -102,6 +131,10 @@ bool yearValidation(int year)
     return true;
 }
 
+/// <summary>
+/// Function to check for the validity of entered option in the start menu.
+/// </summary>
+/// <param name="choice"></param>
 void choiceFromMenuValidation(int choice)
 {
     if (choice < 1 || choice > 7)
@@ -112,6 +145,11 @@ void choiceFromMenuValidation(int choice)
     }
 }
 
+/// <summary>
+/// Function to check for the validity of entered event name.
+/// </summary>
+/// <param name="eventName"></param>
+/// <returns>true, if it is valid</returns>
 bool eventNameValidation(string eventName)
 {
     if (eventName.find("-") != string::npos || eventName.find("/") != string::npos)
@@ -124,6 +162,11 @@ bool eventNameValidation(string eventName)
     return true;
 }
 
+/// <summary>
+/// Function to check the uniqueness of each event name.
+/// </summary>
+/// <param name="eventName"></param>
+/// <returns>true, if it is unique</returns>
 bool uniqueEventNameValidation(string eventName)
 {
     string wholeLine;
@@ -148,6 +191,11 @@ bool uniqueEventNameValidation(string eventName)
     return true;
 }
 
+/// <summary>
+/// Function to check if an event is already entered.
+/// </summary>
+/// <param name="eventName"></param>
+/// <returns>true, if it is in the list</returns>
 bool isEventInList(string eventName)
 {
     string wholeLine;
@@ -170,6 +218,11 @@ bool isEventInList(string eventName)
     return false;
 }
 
+/// <summary>
+/// Function to check for the validity of entered first day of week.
+/// </summary>
+/// <param name="firstWeekDay"></param>
+/// <returns>true, if it is "Sun" or "Mon"</returns>
 bool firstWeekDayValidation(string firstWeekDay)
 {
     if (firstWeekDay != "Sun" && firstWeekDay != "Mon")
@@ -182,6 +235,9 @@ bool firstWeekDayValidation(string firstWeekDay)
     return true;
 }
 
+/// <summary>
+/// Function that shows the calendar start menu.
+/// </summary>
 void calendarStartMenu()
 {
     const string DAY[] = { "Sunday","Monday","Tuesday",
@@ -384,6 +440,13 @@ void calendarStartMenu()
     firstDayOfTheWeek.close();
 }
 
+/// <summary>
+/// Function that calculates the number of days in a given month and year.
+/// </summary>
+/// <param name="day"></param>
+/// <param name="month"></param>
+/// <param name="year"></param>
+/// <returns>number of days</returns>
 int dayNumber(int day, int month, int year)
 {
     static int t[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
@@ -393,6 +456,11 @@ int dayNumber(int day, int month, int year)
     return (year + year / 4 - year / 100 + year / 400 + t[month - 1] + day) % 7;
 }
 
+/// <summary>
+/// Function that returns the name of a month.
+/// </summary>
+/// <param name="monthNumber"></param>
+/// <returns>month name from January to December</returns>
 string getMonthName(int monthNumber)
 {
     string months[] = { "January", "February", "March", "April", "May", "June",
@@ -401,6 +469,12 @@ string getMonthName(int monthNumber)
     return (months[monthNumber]);
 }
 
+/// <summary>
+/// Function that returns a day name of the week from Sunday to Saturday or from Monday to Sunday.
+/// </summary>
+/// <param name="dayOfWeek"></param>
+/// <param name="firstWeekDay"></param>
+/// <returns>week day name from Sunday to Saturday or from Monday to Sunday</returns>
 string getWeekDayName(int dayOfWeek, string firstWeekDay)
 {
     string daysFromSunToSat[] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
@@ -416,6 +490,12 @@ string getWeekDayName(int dayOfWeek, string firstWeekDay)
     }
 }
 
+/// <summary>
+/// Functions that returns the number of days in a month for a given year.
+/// </summary>
+/// <param name="monthNumber"></param>
+/// <param name="year"></param>
+/// <returns>number of days in a month</returns>
 int numberOfDays(int monthNumber, int year)
 {
     if (monthNumber == 0)
@@ -486,6 +566,12 @@ int numberOfDays(int monthNumber, int year)
     }
 }
 
+/// <summary>
+/// Function that calculates when is the first day of a month.
+/// </summary>
+/// <param name="month"></param>
+/// <param name="year"></param>
+/// <returns>when is the first day</returns>
 int getFirstDayOfMonth(int month, int year)
 {
     unsigned a, y, m;
@@ -497,6 +583,13 @@ int getFirstDayOfMonth(int month, int year)
     return (1 + y + (y / 4) - (y / 100) + (y / 400) + ((31 * m) / 12)) % 7;
 }
 
+/// <summary>
+/// Function that returns the number of events for a day of a month.
+/// </summary>
+/// <param name="month"></param>
+/// <param name="year"></param>
+/// <param name="dayOfMonth"></param>
+/// <returns>number of events for a day</returns>
 int findNumberOfEventsForEachDayOfTheMonth(int month, int year, int dayOfMonth)
 {
     int eventsNum = 0;
@@ -575,6 +668,12 @@ int findNumberOfEventsForEachDayOfTheMonth(int month, int year, int dayOfMonth)
     }
 }
 
+/// <summary>
+/// Function that returns numbers of events for all days of a month.
+/// </summary>
+/// <param name="month"></param>
+/// <param name="year"></param>
+/// <returns>array with the numbers of events</returns>
 int* findNumbersOfEventsForAMonth(int month, int year)
 {
     int eventsNum = 0;
@@ -646,6 +745,13 @@ int* findNumbersOfEventsForAMonth(int month, int year)
     return numOfDayEvents;
 }
 
+/// <summary>
+/// Function that calculates and returns the day of week for a given date.
+/// </summary>
+/// <param name="day"></param>
+/// <param name="month"></param>
+/// <param name="year"></param>
+/// <returns>day name of the week</returns>
 string getDayOfWeekFromDate(int day, int month, int year)
 {
     static int t[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
@@ -657,6 +763,11 @@ string getDayOfWeekFromDate(int day, int month, int year)
     return getWeekDayName(dayOfWeek, "Sun");
 }
 
+/// <summary>
+/// Function that prints all events of a month for the monthly schedule.
+/// </summary>
+/// <param name="month"></param>
+/// <param name="year"></param>
 void printEvents(int month, int year)
 {
     string line;
@@ -811,6 +922,12 @@ void printEvents(int month, int year)
     }
 }
 
+/// <summary>
+/// Functions that prints a monthly calendar for given month and year.
+/// </summary>
+/// <param name="month"></param>
+/// <param name="year"></param>
+/// <param name="firstWeekDay"></param>
 void showCalendar(int month, int year, string firstWeekDay)
 {
     char ch;
@@ -1061,6 +1178,11 @@ void showCalendar(int month, int year, string firstWeekDay)
     eventsFile.close();
 }
 
+/// <summary>
+/// Function that shows the monthly schedule.
+/// </summary>
+/// <param name="month"></param>
+/// <param name="year"></param>
 void showSchedule(int month, int year)
 {
     char ch;
@@ -1121,16 +1243,25 @@ void showSchedule(int month, int year)
     printEvents(month, year);
 }
 
+/// <summary>
+/// Function that sorts events by their start date.
+/// </summary>
 void sortEventsByStartDate()
 {
 
 }
 
+/// <summary>
+/// Function that sorts events alphabetically.
+/// </summary>
 void sortEventsByName()
 {
 
 }
 
+/// <summary>
+/// Function that prints all the entered events in a list.
+/// </summary>
 void listEvents()
 {
     cout << endl;
@@ -1175,6 +1306,11 @@ void listEvents()
     eventsFile.close();
 }
 
+/// <summary>
+/// Function that returns the duration of an event.
+/// </summary>
+/// <param name="eventName"></param>
+/// <returns>duration of an event</returns>
 int eventDuration(string eventName)
 {
     int eventDuration = 0;
@@ -1199,6 +1335,9 @@ int eventDuration(string eventName)
     return eventDuration;
 }
 
+/// <summary>
+/// Function that adds an event to the file.
+/// </summary>
 void addEvent()
 {
     cout << endl;
@@ -1327,6 +1466,12 @@ void addEvent()
     addDurationToEvents(eventName, startDate, endDate);
 }
 
+/// <summary>
+/// Function that adds duration of events to the file.
+/// </summary>
+/// <param name="eventName"></param>
+/// <param name="startDate"></param>
+/// <param name="endDate"></param>
 void addDurationToEvents(string eventName, string startDate, string endDate)
 {
     int startDay = 0;
@@ -1443,6 +1588,10 @@ void addDurationToEvents(string eventName, string startDate, string endDate)
     }
 }
 
+/// <summary>
+/// Function that removes an event from the file.
+/// </summary>
+/// </summary>
 void removeEvent()
 {
     cout << endl;
@@ -1497,6 +1646,11 @@ void removeEvent()
     removeEventFromEventsByDaysFile(eventName);
 }
 
+/// <summary>
+/// Function that removes an event from the second file.
+/// </summary>
+/// </summary>
+/// <param name="eventName"></param>
 void removeEventFromEventsByDaysFile(string eventName)
 {
     string wholeLine;
@@ -1536,6 +1690,9 @@ void removeEventFromEventsByDaysFile(string eventName)
     }
 }
 
+/// <summary>
+/// Function that changes the first day of the week.
+/// </summary>
 void setFirstWeekDay()
 {
     cout << endl;
@@ -1591,6 +1748,10 @@ void setFirstWeekDay()
     firstDayOfTheWeek.close();
 }
 
+/// <summary>
+/// The main function that runs the calendar program.
+/// </summary>
+/// <returns></returns>
 int main()
 {
     calendarStartMenu();
