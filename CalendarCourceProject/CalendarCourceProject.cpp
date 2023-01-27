@@ -264,7 +264,7 @@ void calendarStartMenu()
 
     string line;
     ifstream eventsFile;
-    eventsFile.open("events.txt", ios::app);
+    eventsFile.open("events_day_by_day.txt", ios::app);
 
     if (eventsFile.is_open())
     {
