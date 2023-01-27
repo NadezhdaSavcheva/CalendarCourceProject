@@ -1020,7 +1020,14 @@ void showCalendar(int month, int year, string firstWeekDay)
 
                 for (int j = 1; j <= days; j++)
                 {
-                    eventsForTheDay = findNumbersOfEventsForAMonth(month, year)[j];
+                    if (j == 31)
+                    {
+                        eventsForTheDay = findNumbersOfEventsForAMonth(month, year)[j - 1];
+                    }
+                    else
+                    {
+                        eventsForTheDay = findNumbersOfEventsForAMonth(month, year)[j];
+                    }
 
                     if (eventsForTheDay > 0)
                     {
@@ -1122,7 +1129,14 @@ void showCalendar(int month, int year, string firstWeekDay)
                 int eventsForTheDay = 0;
                 for (int j = 1; j <= days; j++)
                 {
-                    eventsForTheDay = findNumbersOfEventsForAMonth(month, year)[j];
+                    if (j == 31)
+                    {
+                        eventsForTheDay = findNumbersOfEventsForAMonth(month, year)[j - 1];
+                    }
+                    else
+                    {
+                        eventsForTheDay = findNumbersOfEventsForAMonth(month, year)[j];
+                    }
 
                     if (eventsForTheDay > 0)
                     {
@@ -1567,6 +1581,11 @@ void addDurationToEvents(string eventName, string startDate, string endDate)
             {
                 secTempFile << wholeLine << endl;
                 secTempFile.flush();
+            }
+
+            if (eventsByDaysFile.eof())
+            {
+                break;
             }
         }
     }

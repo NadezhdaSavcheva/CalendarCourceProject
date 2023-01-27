@@ -45,3 +45,8 @@ Holiday (Day 7/10)-07/04/2023
 Holiday (Day 8/10)-08/04/2023
 Holiday (Day 9/10)-09/04/2023
 Holiday (Day 10/10)-10/04/2023
+Algebra exam (part 2) (Day 1/2)-30/01/2023
+Algebra exam (part 2) (Day 2/2)-31/01/2023
+IP exam-09/02/2023
+Discrete Structures exam-11/02/2023
+DIC exam-03/02/2023
